@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				font-family: arial;
+			}
+			body,html{
+				background:#fff;
+				/*width: 100%;*/
+				height: 100%;
+			}
+			li{list-style: none;}
+			#wrap{
+				width: 100%;
+				position: relative;
+			}
+			/*导航栏样式*/
+			
+			#headerbox{
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				top:0;
+				left: 0;
+				z-index: 10;
+			}
+			/*滑动后的导航栏*/
+			#headerScroll{
+				width: 100%;
+				height: 45px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				border-bottom: solid 2px #A0543B;
+				background: #fff;
+				display: none;
+			}
+			#headerScroll #srcollheader{
+				width: 62.5%;
+				height: 100%;
+				margin: 0 auto;
+				
+			}
+			#headerScroll #srcollheader ul li{
+				float:left;
+				margin-right:7.9%;
+				height: 45px;
+				line-height: 45px;
+				cursor: pointer;
+			}
+			#headerScroll #srcollheader ul li:last-child{
+				margin-right: 0;
+				padding-top: 6px;
+			}
+			#headerScroll #srcollheader ul li:hover{
+				color: #cc0000;
+			}
+			#header{
+				width: 405px;
+				height: 50px;
+				border-bottom:solid 1px #fff;
+				border-top: 2px solid #fff;
+				position: absolute;
+				left: calc(50% - 205px);
+				top:calc(50% - 25px);
+				position: absolute;
+			}
+			#header ul{
+				height: 33px;
+				position: absolute;
+				left: 0;
+				top: calc(50% - 16px);
+			}
+			#header ul  li{
+				float: left;
+				height: 33px;
+				text-align: center;
+				line-height: 33px;
+				color: #fff;
+				margin-left: 19px;
+				font-size: 19px;
+				cursor: pointer;
+			}
+			
+			#header ul  li:first-child{
+				margin-left: 0;
+				color: #A0543B;
+			}
+			#header ul  li:hover{
+				color: #A0543B;
+			}
+			.selected{
+				color: #cc0000;
+			}
+			/*banner样式*/
+			#bannerBox{
+				width: 100%;
+				height: 100%;
+			}
+			#bannerBox ul{
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			#bannerBox ul li{
+				overflow: hidden;
+				position: relative;
+				display: none;
+			}
+			#bannerBox ul li:first-child{
+				display: block;
+			}
+			#bannerBox ul li img{
+				width: 100%;
+				height: 100%;
+			}
+			#bannerBox ul li .addimg{
+				position: absolute;
+				width: 21.3%;
+				margin:0 auto;
+			}
+			#bannerBox ul li .addimg img{
+				width: 100%;
+				height: 100%;
+			}
+			#bannerBox ul li .logo{
+				height: 17.9%;
+				left:101%;
+				top: 18%;
+			}
+			#bannerBox ul li .show{
+				left: -21.3%;
+				height: 24%;
+				bottom: 7.5%;
+			}
+			/*exbox样式*/
+			.exbox{
+				width: 100%;
+				height: 100%;
+				background: #fff;
+				position: relative;
+				overflow: hidden;
+			}
+			.exbox .exboxHeader{
+				width: 100%;
+				height: 18%;
+				background: #fff;
+				position: relative;
+			}
+			.exbox .exboxHeader .exheader{
+				width: 100%;
+				height: 66%;
+				position: absolute;
+				top: 50%;
+			}
+			.exbox .exboxHeader .exheader .title{
+				height: 30px;
+				line-height: 30px;
+				margin-left: 20%;
+				font-weight: 600;
+				font-size: 21px;
+				color:#333;
+			}
+			.exbox .exboxHeader .exheader .line{
+				width: 60px;
+				height:2px;
+				background: #A0543B;
+				margin-left: 20%;
+			}
+			.exbox .exboxHeader .exheader .contentTitle{
+				margin-top: 5px;
+				margin-left: 20%;
+				font-family: "微软雅黑";
+				color: #333;
+				font-size: 18px;
+			}
+			/*左入三角*/
+			.exbox #leftAngle{
+				width: 100%;
+				height: 100;
+				position: absolute;
+				/*left: 0;*/
+				left: -100%;
+				top: 11%;
+			}
+			.exbox #rightAngle{
+				width: 100%;
+				height: 100;
+				position: absolute;
+				/*left:60%;*/
+				left: 100%;
+				top: 11%;
+			}
+			/*右入三角*/
+			.exbox #rightAngle img{
+				width: 40%;
+				height: 94.8%;
+			}
+			.exbox #leftAngle img{
+				width: 40%;
+				height: 94.8%;
+			}
+			.exbox > img{
+				width: 100%;
+				height: 82%;
+			}
+			.exbox .littleTitle{
+				width: 500px;
+				height: 30px;
+				line-height: 30px;
+				border-top: solid 2px #ccc;
+				margin-top: 40px;
+				margin-left: 20%;
+				font-family: "微软雅黑";
+				color: #333;
+				font-size: 18px;
+			}
+			.exbox #realImg ul{
+				width: 100%;
+			}
+			.exbox #realImg > ul li{
+				width: 100%;
+				height: auto;
+				margin-right: 5%;
+				float: left;
+				display: block;	
+			}
+			.exbox #realImg > ul li:last-child{
+				margin-right: 0;
+			}
+			.exbox #realImg ul li img{
+				width: 100%;
+			}
+			
+			.exbox  #realTheme{
+				padding: 0 30px;
+				width: 100%;
+				margin: 0% auto;
+			}
+			.exbox  #realTheme ul li{
+				width: 100%;
+
+				float: left;
+			}
+			.exbox  #realTheme ul li:last-child{
+				margin-right: 0%;
+			}
+			.exbox  #realTheme ul li img{
+				width: 100%;
+			}
+			.exbox  #showtable{
+				width: 100%;
+				height: 9%;
+				display: block;
+				margin-top:-19%;
+			}
+			#endshow{
+				height: 30%;
+				width: 100%;
+				background: rgba(0,0,0,.4);
+				position: absolute;
+				left: 0;
+			}
+			#endtitle{
+				padding: 14px 0;
+				font-size: 18px;
+				font-weight: 500;
+				margin-left: 20%;
+				color: #fff;
+				margin-top:48px
+			}
+			#endshow #line{
+				width: 50px;
+				height: 2px;
+				background: #A0543B;
+				margin-left: 20%;
+			}
+			#endheader{
+				margin-left: 20%;
+				padding:10px 0;
+				color: #fff;
+				font-family: "微软雅黑";
+			}
+			#personMess{
+				width: 62%;
+				margin-top: 10px;
+				margin-left: 20%;
+				height: 30px;
+			}
+			#personMess ul li{
+				float: left;
+				color: #fff;
+			}
+			#personMess ul li{
+				margin-right: 12%;
+			}
+			#personMess ul li:last-child{
+				margin-right: 0;
+			}
+			#personMess ul li i{
+				color: #fff;
+				font-size: 20px;
+			}
+			#personMess ul li i:hover{
+				color: #A0543B;;
+			}
+			#endPic{
+				width: 100%;
+				height: 100%;
+			}
+ 		</style>
+ 		<link rel="stylesheet" href="http://at.alicdn.com/t/font_v9cbp01yqgzumcxr.css" />
+	</head>
+	
+	<body>
+		
+		<div id="wrap">
+			<!--导航栏-->
+			<div id="headerbox">
+				<div id="header">
+					<ul >
+						<li onclick="scrollTopTo(this);" data-index=0>objective</li>
+						<li onclick="scrollTopTo(this);" data-index=1>experties</li>
+						<li onclick="scrollTopTo(this);" data-index=2>awards</li>
+						<li onclick="scrollTopTo(this);" data-index=3>works</li>
+						<li onclick="scrollTopTo(this);" data-index=7>contact</li>
+					</ul>
+				</div>
+				
+				<div id="headerScroll">
+					<div id="srcollheader">
+						<ul>
+							<li><img src="img/banner/logo-1.png"/></li>
+							<li class="headerSele" onclick="scrollTopTo(this);" data-index=0>objective</li>
+							<li class="headerSele"onclick="scrollTopTo(this);" data-index=1> experties</li>
+							<li class="headerSele"onclick="scrollTopTo(this);" data-index=2>awards</li>
+							<li class="headerSele"onclick="scrollTopTo(this);" data-index=3>works</li>
+							<li class="headerSele"onclick="scrollTopTo(this);" data-index=7>contact</li>
+							<li><img src="img/banner/search03.png"/></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--banner 区域-->
+			<div id="bannerBox">
+				<ul id="bannerUl"> 
+					<li>
+						<img src="img/banner/banner3_01.jpg"/>
+						<div class="logo addimg">
+							<img src="img/banner/B1-top.png" />
+						</div>
+						<div class="show addimg">
+							<img src="img/banner/B1-bot.png"/>
+						</div>
+					</li>
+					<li>
+						<img src="img/banner/banner2_01.jpg"/>
+						<div class="logo addimg">
+							<img src="img/banner/B2-top.png" />
+						</div>
+						<div class="show addimg">
+							<img src="img/banner/B2-bot.png"/>
+						</div>
+					</li>
+					
+					<li>
+						
+						<img src="img/banner/3.jpg"/>
+						<div class="logo addimg">
+							<img src="img/banner/B3-top.png" />
+						</div>
+						<div class="show addimg">
+							<img src="img/banner/B3-bot.png"/>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="exbox">
+				<div class="exboxHeader">
+					<div class="exheader">
+						<div class="title">EXPERTIES</div>
+						<div class="line"></div>
+						<div class="contentTitle">
+							学会工具，并不代表你学会创作，路还很长
+						</div>
+					</div>
+				</div>
+				<img src="img/personWeb02.jpg" />
+			</div>
+			
+			<div class="exbox">
+				<div class="exboxHeader">
+					<div class="exheader">
+						<div class="title">AWARDS</div>
+						<div class="line"></div>
+						<div class="contentTitle">
+							给自己一个交代，为大学生活画上一个句号
+						</div>
+					</div>
+				</div>
+				<img src="img/personWeb03_02.jpg" />
+				<div id="leftAngle">
+					<img src="img/personweb_02.png" />
+				</div>
+				<div id="rightAngle">
+					<img src="img/personweb_03.png" />
+				</div>
+			</div>
+			
+			<div class="exbox ">
+				<div class="exboxHeader">
+					<div class="exheader">
+						<div class="title">WORKS</div>
+						<div class="line"></div>
+						<div class="contentTitle">
+							 拿起手中的画笔，学着去涂鸦，没有人一开始就是伟大的设计师。
+						</div>
+					</div>
+				</div>
+				<div class="littleTitle"style="margin-top: 50px;">写实图标</div>
+				<div id="realImg" style="margin-top: 8%;">
+					<ul>
+						<li><img src="img/realImg/realImg1.jpg" /></li>
+					</ul>
+				</div>
+			</div>
+			<div class="exbox">
+				<div class="littleTitle"style="margin-top: 30px;">手机主题</div>
+				<img src="img/products1.jpg" style="margin-top: 3%;"/>
+			</div>
+			
+			<div class="exbox">
+				<div class="littleTitle"style="margin-top: 7%;">手机主题图标</div>
+				<div id="realTheme" >
+					<ul>
+						<li><img src="img/Theme/theme1.jpg" /></li>
+					</ul>
+				</div>
+				<img src="img/bottom.jpg" id="showtable"/>
+			</div>
+			
+			<div class="exbox">
+				<div class="littleTitle"style="margin-top: 5%;">网站项目</div>
+				<img src="img/product2.jpg" />
+			</div>
+			
+			<div class="exbox">
+				<div id="endshow">
+					<div id="endtitle">
+						CONTACT
+					</div>
+					<div id="line"></div>
+					<div id="endheader"> 每一个年轻人，都需要锻炼的机会，给他点时间，他会给你惊喜。</div>
+					<div id="personMess">
+						<ul>
+							<li><i class="iconfont icon-dianhua"></i>&nbsp;18809491752</li>
+							<li><i class="iconfont icon-circularjingxiaoshang"></i>&nbsp;江苏宿迁</li>
+							<li><i class="iconfont icon-brand"> </i>&nbsp;zgl122@aliyun.com</li>
+							<li><i class="iconfont icon-iconfontrili"> </i>&nbsp;1994.12</li>
+							
+						</ul>
+					</div>
+				</div>
+				<img src="img/thankyou_02.jpg"  id="endPic"/>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+		<script type="text/javascript">
+			var wheight= window.innerHeight;
+			var wwidth = window.innerWidth;
+			var index=0;
+			var Domlis= $("#bannerUl").find('li');
+			$("#wrap").height(window.innerHeight);
+			$(function(){
+				bannerFadein();
+				showanimate();
+			});
+			function bannerFadein(){
+				setInterval(showanimate,5000);
+			}
+			
+			function showanimate(){
+				index++;
+				if (index==3) {
+					index=0;
+				}
+				$(Domlis[index]).fadeIn("slow",function(){
+					$($(this).find(".logo")).animate({left:"39.1%"},1600,'easeInOutElastic')
+					.parent().siblings().find('.logo').css('left','101%');
+					$(this).find(".show").animate({left:"39.1%"},1600,'easeInOutElastic')
+					.parent().siblings().find('.show').css('left','-22%');;
+				}).siblings().css('display','none');
+			}
+			
+			$(window).on('scroll',function(e){
+				var heightTop= $(window).scrollTop();
+				if (heightTop<wheight/2 ) {
+					$("#header").fadeIn('slow',function(){
+						$(this).css('display','block');
+						$('#headerScroll').fadeOut('fast',function(){
+							$(this).css('display','none');
+						});
+					})
+				}else if (heightTop>wheight/2) {
+					$("#header").fadeOut('slow',function(){
+						$(this).css('display','none');
+						$('#headerScroll').fadeIn('slow').css('display','block');
+					})
+					if (heightTop>wheight && heightTop<wheight*2) {
+						$($(".headerSele")[1]).addClass("selected").siblings().removeClass("selected");
+					}else if (heightTop>wheight*2 && heightTop<wheight*3) {
+						$($(".headerSele")[2]).addClass("selected").siblings().removeClass("selected");
+						$("#rightAngle").animate({left:"60%"},500,'easeOutBounce');
+						$("#leftAngle").animate({left:'0'},500,'easeOutBounce');
+					}else if (heightTop>wheight*3 && heightTop<wheight*6) {
+						$($(".headerSele")[3]).addClass("selected").siblings().removeClass("selected");
+					}else if (heightTop>wheight*6 && heightTop<wheight*7) {
+						$($(".headerSele")[4]).addClass("selected").siblings().removeClass("selected");
+					}
+					
+				}
+			});
+			
+			function scrollTopTo(obj){
+				var index=$(obj).data('index');
+				$(window).scrollTop(index*wheight);
+			}
+		</script>
+	</body>
+</html>
